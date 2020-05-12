@@ -20,6 +20,7 @@ require('./middleware/passport')(passport);
 setMiddleware(app);
 // using routes form route directory
 setRoutes(app);
+app.use('/public', express.static('public'));
 const port = process.env.PORT || 5000;
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('shop/build'));
@@ -28,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 // error handle
-app.use('/public', express.static('public'));
+
 app.use((req, res, next) => {
   const error = new Error('404 Page Not Found');
   error.status = 404;
